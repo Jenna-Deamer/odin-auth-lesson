@@ -8,7 +8,11 @@ require("dotenv").config();
 
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: Number(process.env.DB_PORT),
 });
 
 const app = express();
@@ -20,6 +24,19 @@ app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => res.render("index"));
+app.get("/sign-up", (req, res) => res.render("sign-up-form"));
+app.post("/sign-up", async (req, res, next) => {
+    try {
+        await pool.query("INSERT INTO users (username, password) VALUES ($1, $2)", [
+            req.body.username,
+            req.body.password,
+        ]);
+        res.redirect("/");
+    } catch (err) {
+        return next(err);
+    }
+});
+
 
 app.listen(3000, (error) => {
     if (error) {
