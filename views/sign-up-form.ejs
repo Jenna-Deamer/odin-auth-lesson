@@ -9,10 +9,19 @@
 <body>
     <h1>Sign Up</h1>
     <form action="/sign-up" method="POST">
-        <label for="username">Username</label>
-        <input id="username" name="username" placeholder="username" type="text" />
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password" />
+        <fieldset>
+            <label for="firstName">First Name:</label>
+            <input id="firstName" name="firstName" placeholder="First Name" type="text" />
+            <label for="lastName">Last Name:</label>
+            <input id="lastName" name="lastName" placeholder="Last Name" type="text" />
+        </fieldset>
+        <fieldset>
+            <label for="username">Username</label>
+            <input id="username" name="username" placeholder="username" type="text" />
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" />
+        </fieldset>
+
         <button type="submit">Sign Up</button>
     </form>
 </body>

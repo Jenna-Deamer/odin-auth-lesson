@@ -1,5 +1,5 @@
-const bcrypt = require("bcryptjs");
 const pool = require("../db/pool");
+const { generatePassword } = require("../auth/passwordUtils");
 
 async function showSignUpForm(req, res) {
     res.render("sign-up-form");
@@ -7,10 +7,10 @@ async function showSignUpForm(req, res) {
 
 async function handleSignUp(req, res, next) {
     try {
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const hashedPassword = await generatePassword(req.body.password);
         await pool.query(
-            "INSERT INTO users (username, password) VALUES ($1, $2)",
-            [req.body.username, hashedPassword]
+            "INSERT INTO users (username, password, first_name, last_name) VALUES ($1, $2, $3, $4)",
+            [req.body.username, hashedPassword, req.body.firstName, req.body.lastName]
         );
         res.redirect("/");
     } catch (error) {
