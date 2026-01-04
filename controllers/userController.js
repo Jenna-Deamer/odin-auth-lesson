@@ -4,8 +4,7 @@ const { body, validationResult, matchedData } = require("express-validator");
 const { checkIfEmailIsInUse } = require("../db/queries");
 
 const authLengthErr = 'Must be between 1 and 50 characters.';
-const passwordMatchErr = 'Passwords must match';
-const passwordLength = 'Password must be between 8 and 50 characters'
+const passwordLength = 'Password must be between 8 and 50 characters';
 
 const validateSignUp = [
     body('firstName').trim()

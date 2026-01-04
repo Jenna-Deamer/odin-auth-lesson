@@ -1,0 +1,82 @@
+* {
+    padding: unset;
+    margin: unset;
+    box-sizing: border-box;
+}
+
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+body,
+html {
+    height: 100%;
+}
+
+/*Inherit fonts for form controls*/
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+/* Improve line wrapping */
+p {
+    text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
+}
+
+.btn {
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 700;
+    transition: .3s ease-in-out;
+    width: 100px;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #0f5099;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #043770;
+}
+
+.user-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 2em;
+    background-color: rgb(9, 1, 22);
+    color: #fff;
+}
