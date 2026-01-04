@@ -35,12 +35,23 @@ async function getAllMessages() {
     return rows;
 }
 
+async function findMessageById(messageTitle) {
+    const { rows } = await pool.query("SELECT * FROM messages WHERE message_title = $1", [messageTitle]);
+    return rows[0];
+}
+async function deleteMessageById(messageId) {
+    const { rows } = await pool.query("DELETE FROM messages WHERE id = $1 RETURNING *;", [messageId]);
+    return rows;
+}
+
 module.exports = {
     findUserByName,
     findUserById,
     checkIfEmailIsInUse,
     addMembership,
     createMessage,
-    getAllMessages
+    getAllMessages,
+    deleteMessageById,
+    findMessageById
 
 }

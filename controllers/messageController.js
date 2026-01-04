@@ -1,6 +1,6 @@
 const pool = require("../db/pool");
 const { body, validationResult, matchedData } = require("express-validator");
-const { createMessage, getAllMessages, findUserById } = require("../db/queries");
+const { createMessage, getAllMessages, findUserById, findMessageById, deleteMessageById } = require("../db/queries");
 
 const validateMessage = [
     body('messageTitle').trim().isLength({ min: 1, max: 60 }).withMessage(`Message Title must be between 1 and 60 characters`),
@@ -63,6 +63,19 @@ async function handleNewMessage(req, res, next) {
 }
 
 async function handleDeleteMessage(req, res, next) {
+    try {
+        const { messageTitle } = req.query;
+        const message = await findMessageById(messageTitle);
+        if (!message) {
+            return res.status(404).send("Message not found");
+        }
+
+        await deleteMessageById(message.id);
+        res.redirect("/");
+    } catch (err) {
+        next(err);
+    }
+
 
 }
 

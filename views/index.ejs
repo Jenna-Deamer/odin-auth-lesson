@@ -6,11 +6,10 @@
     <link rel="stylesheet" href="/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-
 </head>
 
 <body>
-    <% if (locals.user) {%>
+    <% if (user) { %>
         <div class="user-header">
             <h1>Welcome <%= user.first_name %>
             </h1>
@@ -18,9 +17,7 @@
                 <a class="btn btn-primary" href="/new">Create Message</a>
                 <a class="btn btn-primary" href="/join">Join Club</a>
                 <a href="/log-out" class="btn btn-danger">Log Out</a>
-
             </div>
-
         </div>
 
         <div class="messages-container">
@@ -43,15 +40,26 @@
                             <% } else { %>
                                 <small><em>Join the club to see author and date details.</em></small>
                                 <% } %>
-                    </div>
 
+                                    <% if (user.admin===true) { %>
+                                        <div class="delete-container">
+                                            <form action="/delete" method="GET"
+                                                onsubmit="return confirm(`Are you sure you want to delete <%= message.messageTitle %>?`)">
+                                                <input type="hidden" name="messageTitle"
+                                                    value="<%= message.messageTitle %>">
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+
+                                        </div>
+
+                                        <% } %>
+                    </div>
                 </div>
                 <% }) %>
         </div>
 
-
         <% } else { %>
-            <h1>please log in</h1>
+            <h1>Please log in</h1>
             <form action="/log-in" method="POST">
                 <label for="username">Username</label>
                 <input id="username" name="username" placeholder="username" type="text" />
@@ -60,9 +68,7 @@
                 <button type="submit">Log In</button>
                 <h2>or <a href="/sign-up">signup</a></h2>
             </form>
-            <%}%>
-
-
+            <% } %>
 </body>
 
 </html>
