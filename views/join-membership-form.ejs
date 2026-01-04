@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/form.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Membership</title>
+</head>
+
+<body>
+    <h1>Join Membership</h1>
+    <h2>Enter the secret password!</h2>
+    <%- include("partials/errors.ejs") %>
+        <form action="/join" method="POST">
+            <fieldset>
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" />
+            </fieldset>
+
+            <button type="submit">Join</button>
+        </form>
+</body>
+
+</html>

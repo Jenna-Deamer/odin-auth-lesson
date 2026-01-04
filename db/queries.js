@@ -14,9 +14,15 @@ async function checkIfEmailIsInUse(email) {
     const { rows } = await pool.query("SELECT * FROM users WHERE username = $1", [email]);
     return rows[0];
 }
+
+async function addMembership(username) {
+    const { rows } = await pool.query("UPDATE users SET membership_status = true WHERE username = $1", [username]);
+    return rows[0];
+}
 module.exports = {
     findUserByName,
     findUserById,
-    checkIfEmailIsInUse
+    checkIfEmailIsInUse,
+    addMembership
 
 }

@@ -14,10 +14,18 @@
         <div class="user-header">
             <h1>Welcome <%= user.first_name %>
             </h1>
-            <a href="/log-out" class="btn btn-primary">Log Out</a>
+            <div class="header-buttons">
+                <a class="btn btn-primary" href="/new">Create Message</a>
+                <a class="btn btn-primary" href="/join">Join Club</a>
+                <a href="/log-out" class="btn btn-danger">Log Out</a>
+
+            </div>
+
         </div>
 
-        <div class="messages-container"></div>
+        <div class="messages-container">
+
+        </div>
 
         <% } else { %>
             <h1>please log in</h1>

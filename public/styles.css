@@ -72,11 +72,37 @@ h6 {
     background-color: #043770;
 }
 
+.btn-danger {
+    background-color: #c41e1e;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #991212;
+
+}
+
 .user-header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
     padding: 1em 2em;
-    background-color: rgb(9, 1, 22);
+    background-color: rgb(34, 33, 33);
     color: #fff;
+}
+
+.header-buttons {
+    margin-top: .5em;
+    padding-bottom: .5em;
+}
+
+.header-buttons a {
+    margin: 0 .2em;
+}
+
+.error-list {
+    list-style: none;
+}
+
+.error-list li {
+    color: #991212;
 }

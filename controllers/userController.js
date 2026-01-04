@@ -1,7 +1,8 @@
 const pool = require("../db/pool");
 const { generatePassword } = require("../auth/passwordUtils");
 const { body, validationResult, matchedData } = require("express-validator");
-const { checkIfEmailIsInUse } = require("../db/queries");
+const { checkIfEmailIsInUse, addMembership } = require("../db/queries");
+
 
 const authLengthErr = 'Must be between 1 and 50 characters.';
 const passwordLength = 'Password must be between 8 and 50 characters';
@@ -63,9 +64,35 @@ function handleLogOut(req, res, next) {
     });
 }
 
+function showMembershipForm(req, res, next) {
+    res.render('join-membership-form');
+}
+
+function handleJoinMembership(req, res, next) {
+    try {
+        const password = req.body.password;
+
+        if (password !== process.env.MEMBERS_PASSWORD) {
+            const errors = [{ msg: 'Incorrect Password!' }];
+
+            return res.status(400).render("join-membership-form", {
+                errors: errors
+            });
+        } else {
+            addMembership(req.user.username);
+            res.redirect("/");
+        }
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+}
+
 module.exports = {
     showSignUpForm,
     handleSignUp,
     handleLogOut,
-    validateSignUp
+    validateSignUp,
+    showMembershipForm,
+    handleJoinMembership
 };
