@@ -106,3 +106,28 @@ h6 {
 .error-list li {
     color: #991212;
 }
+
+.messages-container {
+    padding: 2em;
+    max-width: 2000px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 400px));
+    gap: 1em;
+
+}
+
+.message-card {
+    background-color: #e8ecec;
+    border-radius: 4px;
+    border: 1px solid rgba(34, 33, 33, .5);
+    padding: 1em;
+}
+
+.message-card p {
+    margin: .5em 0;
+}
+
+.message-card-footer {
+    display: flex;
+    flex-direction: column;
+}

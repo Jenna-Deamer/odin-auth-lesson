@@ -24,8 +24,31 @@
         </div>
 
         <div class="messages-container">
+            <% messages.forEach(message=> { %>
+                <div class="message-card">
+                    <h3>
+                        <%= message.messageTitle %>
+                    </h3>
+                    <p>
+                        <%= message.messageBody %>
+                    </p>
+                    <div class="message-card-footer">
+                        <% if (user.membership_status===true) { %>
+                            <small><strong>By:</strong>
+                                <%= message.username %>
+                            </small>
+                            <small><strong>Posted:</strong>
+                                <%= message.timestamp %>
+                            </small>
+                            <% } else { %>
+                                <small><em>Join the club to see author and date details.</em></small>
+                                <% } %>
+                    </div>
 
+                </div>
+                <% }) %>
         </div>
+
 
         <% } else { %>
             <h1>please log in</h1>
@@ -38,7 +61,7 @@
                 <h2>or <a href="/sign-up">signup</a></h2>
             </form>
             <%}%>
-                </form>
+
 
 </body>
 

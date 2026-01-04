@@ -8,7 +8,11 @@ function isAuth(req, res, next) {
 }
 
 function isMember(req, res, next) {
+    if (req.user.membership_status === true) {
+        next();
+    } else {
 
+    }
 }
 
 function IsAdmin(req, res, next) {

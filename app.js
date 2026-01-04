@@ -3,6 +3,7 @@ const express = require("express");
 const session = require("express-session");
 const userRouter = require("./routes/userRouter");
 const messageRouter = require("./routes/messageRouter");
+const messageController = require("./controllers//messageController");
 const passport = require("passport");
 require("./auth/passportConfig");
 require("dotenv").config();
@@ -36,9 +37,19 @@ app.use((req, res, next) => {
 });
 
 
-app.get("/", (req, res) => {
-    res.render("index", { user: req.user });
+app.get("/", async (req, res, next) => {
+    try {
+        const messages = await messageController.getMessages();
+
+        res.render("index", {
+            user: req.user,
+            messages: messages
+        });
+    } catch (err) {
+        next(err);
+    }
 });
+
 
 app.listen(3000, (error) => {
     if (error) {
