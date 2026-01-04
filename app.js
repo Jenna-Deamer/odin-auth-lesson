@@ -2,6 +2,7 @@ const path = require("node:path");
 const express = require("express");
 const session = require("express-session");
 const userRouter = require("./routes/userRouter");
+const messageRouter = require("./routes/messageRouter");
 const passport = require("passport");
 require("./auth/passportConfig");
 require("dotenv").config();
@@ -27,6 +28,7 @@ app.use(session({
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 app.use(userRouter);
+app.use(messageRouter);
 
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
